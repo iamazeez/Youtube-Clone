@@ -1,9 +1,8 @@
 import React,{useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {View,TextInput,FlatList,ActivityIndicator} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import MiniCard from './MiniCard';
-import {useSelector,useDispatch} from 'react-redux';
+import {Text,View,TextInput,FlatList,ActivityIndicator} from 'react-native';
+
+import MiniCard from './../components/MiniCard';
 
 //GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=songs&type=video&key=[YOUR_API_KEY] HTTP/1.1
 
@@ -13,16 +12,11 @@ Ionicons.loadFont();
 
 const SearchScreen = () => {
     const [value,setValue] = useState('');
-    const [loading,setLoading] = useState(false);
-    //const [data,setData] = useState([]);
-    const dispatch = useDispatch();
-    const data = useSelector(state => {
-       return state;
-    });
+    const [loading,setLoading] = useState(true);
+    const [data,setData] = useState([]);
     
-    const navigation = useNavigation();
     //Enter your api key here
-    const apiKey = "AIzaSyDFgaZr6d-fKkKgInhbevK3pEB8gUJKfnM";
+    const apiKey = "";
     
     const fetchData = () => {
        
@@ -30,9 +24,9 @@ const SearchScreen = () => {
         fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=${apiKey}`)
         .then(res => res.json())
         .then(result => {
-           // setData(result.items)
-            dispatch({type:'add',payload:result.items})
+            setData(result.items)
             setLoading(false);
+            
            //console.log(JSON.stringify(result));
         }).catch(err => console.log('Error => ' + err));
     }
@@ -51,7 +45,7 @@ const SearchScreen = () => {
             padding:8
         }}>
 
-        <Ionicons onPress={() => navigation.goBack()} name='md-arrow-back' color='#fff' size={28} />
+        <Ionicons name='md-arrow-back' color='#fff' size={28} />
         <TextInput value={value} onChangeText={(e) => setValue(e)} style={{width:'70%', backgroundColor:"#fff",color:'#000'}}  />
         <Ionicons name='md-send' onPress={() => fetchData()} color='#fff' size={28} />
         </View>
@@ -67,7 +61,9 @@ const SearchScreen = () => {
         }}
         keyExtractor={(item)=>item.id.videoId}
         />
-    } 
+    }
+
+        
         </View>
      )
 }

@@ -4,6 +4,7 @@ import {Text,View} from 'react-native';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {useNavigation} from '@react-navigation/native';
 
 const appColor = '#212121';
 AntDesign.loadFont();
@@ -11,6 +12,9 @@ Ionicons.loadFont();
 MaterialIcons.loadFont();
 
 const Header = () => {
+
+    const navigation = useNavigation();
+
     return (
         <View style={{
             height:55,
@@ -25,7 +29,7 @@ const Header = () => {
              </View>
              <View style={{alignItems:'center',margin:5,marginRight:15,width:120,justifyContent:'space-between',flexDirection:'row'}}>
              <Ionicons name='md-videocam' size={28} color='#fff' />
-             <Ionicons name='md-search' size={28} color='#fff' />
+             <Ionicons name='md-search' onPress={() => navigation.navigate('search')} size={28} color='#fff' />
              <MaterialIcons name='account-circle' size={28} color='#fff' />
              </View>
         </View>

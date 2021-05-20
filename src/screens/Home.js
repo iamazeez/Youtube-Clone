@@ -1,46 +1,37 @@
 import React from 'react';
 
-import {Text,View,ScrollView} from 'react-native';
+import {Text,View,ScrollView,FlatList} from 'react-native';
 
 //Components Here
 import Header from './../components/Header';
 import Card from './../components/Card';
-import SearchScreen from '../components/SearchHeader';
-import MiniCard from './../components/MiniCard';
+import {useSelector} from 'react-redux';
 
 const Home = () =>{
-   /*
+
+    const cardData = useSelector(state => {
+        return state;
+    });
+
+    console.log('Card data = ' + cardData)
+   
     return (
       <View style={{flex:1}}>
           <Header />
-          <ScrollView>
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-          </ScrollView>
+          <FlatList 
+          data={cardData}
+          renderItem={({item}) => {
+            return <Card 
+            videoId={item.id.videoId}
+            title={item.snippet.title}
+            channel={item.snippet.channelTitle}
+            />
+        }}
+        keyExtractor={(item)=>item.id.videoId}    
+          />
       </View>
-    )*/
-
-    return (
-        <View style={{flex:1}}>
-        <SearchScreen />
-        <ScrollView>
-            <MiniCard />
-            <MiniCard />
-            <MiniCard />
-            <MiniCard />
-            <MiniCard />
-            <MiniCard />
-            <MiniCard />
-            <MiniCard />
-            <MiniCard />
-        </ScrollView>
-        
-        </View>
     )
+
 
 }
 
