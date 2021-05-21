@@ -20,7 +20,7 @@ const ExploreCard = (props) => {
 const Explore = () => {
    
     const cardData = useSelector(state => {
-        return state;
+        return state.cardData;
     });
 
     return (
@@ -47,8 +47,8 @@ const Explore = () => {
         }}
         keyExtractor={(item)=>item.id.videoId}    
           />
-
-             </ScrollView>
+</ScrollView>
+            
         </View>
     )
 }

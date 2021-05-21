@@ -2,12 +2,16 @@ import React from 'react';
 
 import {Text,View,Image,Dimensions,TouchableOpacity} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 MaterialIcons.loadFont();
 
 
 const Card = (props) => {
     const navigation = useNavigation();
+ 
+    const {colors} = useTheme();
+
+
     return (
         <TouchableOpacity onPress={() => navigation.navigate('videoPlayer',{videoId:props.videoId,title:props.title})}>
             <View style={{elevation:2}} >
@@ -22,11 +26,11 @@ const Card = (props) => {
                     
                     <View style={{marginLeft:15}}>
                         <Text 
-                        style={{fontSize:16,width:Dimensions.get('screen').width-80}}
+                        style={{fontSize:16,width:Dimensions.get('screen').width-80,color:colors.textColor}}
                         ellipsizeMode='tail'
                         numberOfLines={2}
                         >{props.title}</Text>
-                        <Text style={{fontSize:12}}>{props.channel}</Text>
+                        <Text style={{fontSize:12,color:colors.textColor}}>{props.channel}</Text>
                     </View>
                 </View>
             </View>

@@ -10,7 +10,7 @@ import {useSelector} from 'react-redux';
 const Home = () =>{
 
     const cardData = useSelector(state => {
-        return state;
+        return state.cardData;
     });
 
     console.log('Card data = ' + cardData)
